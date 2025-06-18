@@ -7,8 +7,12 @@ const waitlistRoutes = require('./routes/waitlist'); // Import waitlist route ha
 const journeyRoutes = require('./routes/journey'); // Import journey route handlers
 
 const app = express(); // Create Express app instance
-app.use(cors({ origin: 'http://localhost:8080' })); // Enable CORS for frontend at this origin
-// app.use(cors({ origin: 'http://localhost:5173' })); // Alternative frontend port
+app.use(cors({
+  origin: [
+    'http://localhost:8080', // Local development frontend
+    'https://path-waitlist.vercel.app' // Deployed Vercel frontend
+  ]
+})); // Enable CORS for both local and deployed frontend
 app.use(express.json()); // Parse incoming JSON requests
 
 // Connect to MongoDB using connection string from environment variables
